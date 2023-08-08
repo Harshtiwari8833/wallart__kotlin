@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.wallart'
+    namespace 'com.maverickbits.wallart'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.wallart"
+        applicationId "com.maverickbits.wallart"
         minSdk 24
         targetSdk 33
         versionCode 1
