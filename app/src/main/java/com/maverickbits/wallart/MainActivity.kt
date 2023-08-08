@@ -1,4 +1,4 @@
-package com.example.wallart
+package com.maverickbits.wallart
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

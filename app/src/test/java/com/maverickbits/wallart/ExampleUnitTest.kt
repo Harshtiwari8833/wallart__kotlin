@@ -1,4 +1,4 @@
-package com.example.wallart
+package com.maverickbits.wallart
 
 import org.junit.Test
 
