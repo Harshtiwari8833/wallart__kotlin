@@ -1,12 +1,12 @@
 package com.maverickbits.wallart
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.maverickbits.wallart.Fragments.category_fragment
+import com.maverickbits.wallart.Fragments.favourite_fragment
+import com.maverickbits.wallart.Fragments.profile_fragment
+import com.maverickbits.wallart.Fragments.wall_fragment
 import com.maverickbits.wallart.databinding.ActivityMainBinding
 
 
