@@ -3,7 +3,7 @@ package com.maverickbits.wallart
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.maverickbits.wallart.Fragments.category_fragment
+
 import com.maverickbits.wallart.Fragments.favourite_fragment
 import com.maverickbits.wallart.Fragments.profile_fragment
 import com.maverickbits.wallart.Fragments.wall_fragment
