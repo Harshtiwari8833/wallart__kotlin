@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -15,6 +16,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/frame"
             android:layout_marginBottom="?actionBarSize"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/nav_items"
-            android:id="@+id/btmnav">
+            android:id="@+id/btm_nav">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
