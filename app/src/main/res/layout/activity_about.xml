@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".About_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WALL-ART"
+            android:layout_marginHorizontal="15dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="About"
+                android:textSize="40dp"
+                android:padding="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Welcome to our phone wallpaper application, designed to transform the aesthetics of your mobile device. With our app, you can personalize your phone and make it uniquely yours. Discover an extensive collection of captivating wallpapers, ranging from stunning landscapes to trendy designs and inspiring quotes. Our intuitive interface allows you to effortlessly browse, preview, and set wallpapers that suit your mood and style."
+                android:padding="5dp"
+                android:textSize="17dp"
+                android:layout_marginLeft="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="We believe that your phone's wallpaper should reflect your personality and inspire you every time you unlock your device. That's why we offer regular updates with fresh and vibrant wallpapers to keep your phone looking new and exciting. Join our community of like-minded individuals, where you can share your favorite wallpapers and get inspired by others. Enhance your phone's visual experience, express yourself, and make a statement with our phone wallpaper application."
+                android:textSize="17dp"
+                android:padding="5dp"
+                android:layout_marginLeft="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Thank you for choosing our wallpaper application to enhance your device's aesthetics. We hope that our carefully curated wallpapers will bring joy, inspiration, and a touch of artistry to your everyday life. Start exploring now and let your device reflect your unique style!"
+                android:padding="5dp"
+                android:textSize="17dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="10dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginHorizontal="15dp"
+            android:id="@+id/card"
+            android:background="@drawable/profilebg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Connect With Us:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="We value your feedback and suggestions, and we are committed to continuously improving your WallArt experience. If you have any questions, concerns, or ideas for enhancing the App, please feel free to reach out to us."
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:padding="10dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Email : "
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:id="@+id/mail"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="maverickbits.official@gmail.com"
+                        android:textColor="#1E88E5"
+                        android:layout_marginTop="2dp"
+                        android:textSize="17dp"
+                        android:textStyle="italic"
+                        android:id="@+id/email"
+                        android:layout_toRightOf="@+id/mail"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
