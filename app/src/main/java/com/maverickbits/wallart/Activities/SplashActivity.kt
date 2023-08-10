@@ -19,10 +19,27 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+
         Handler(Looper.getMainLooper()).postDelayed({
-            val mainIntent = Intent(this, MainActivity::class.java)
-            startActivity(mainIntent)
-            finish()
+            val pref = getSharedPreferences("onboarding" , MODE_PRIVATE)
+            val onboarding = pref.getBoolean("flag", false)
+
+            val pref1 = getSharedPreferences("login" , MODE_PRIVATE)
+            val login = pref1.getBoolean("flag1", false)
+            if (onboarding && !login) {
+                val mainIntent = Intent(this, SigningWithGoogleActivity::class.java)
+                startActivity(mainIntent)
+                finish()
+            }else if(login && onboarding){
+                val mainIntent = Intent(this, MainActivity::class.java)
+                startActivity(mainIntent)
+                finish()
+            }else{
+                val mainIntent = Intent(this, OnboardingActivity::class.java)
+                startActivity(mainIntent)
+                finish()
+            }
+
         }, 1500)
 
     }

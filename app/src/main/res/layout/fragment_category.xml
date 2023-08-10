@@ -319,7 +319,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/cars"
+                            android:src="@drawable/car"
                             android:scaleType="centerCrop"/>
 
                         <TextView
@@ -521,7 +521,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/abst"
+                            android:src="@drawable/abs"
                             android:scaleType="centerCrop"/>
 
                         <TextView

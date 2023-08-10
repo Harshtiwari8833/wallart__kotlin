@@ -12,6 +12,13 @@
         android:theme="@style/Theme.WallArt"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.SigningWithGoogleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.OnboardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.OpenWallActivity"
             android:exported="false" />
         <activity
