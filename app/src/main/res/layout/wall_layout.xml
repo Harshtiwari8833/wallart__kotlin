@@ -20,7 +20,7 @@
             android:layout_height="290dp"
             app:cardCornerRadius="18dp"
             android:background="#BABABA"
-            android:id="@+id/wall_cardView">
+            android:id="@+id/wallcardView">
 
 
             <ImageView
