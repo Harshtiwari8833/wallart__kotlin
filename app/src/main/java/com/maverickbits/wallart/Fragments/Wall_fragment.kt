@@ -4,51 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.maverickbits.wallart.Adapter.WallAdapter
+import com.maverickbits.wallart.Models.WallModel
 
 import com.maverickbits.wallart.R
+import com.maverickbits.wallart.Repositery.WallRepo
+import com.maverickbits.wallart.ViewModel.WallViewModel
+import com.maverickbits.wallart.ViewModel.WallViewModelFactory
+import com.maverickbits.wallart.databinding.FragmentWallBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [wall_fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class wall_fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
-
+   private lateinit var wallViewModel: WallViewModel
+    private lateinit var binding: FragmentWallBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wall, container, false)
+       binding = FragmentWallBinding.inflate(layoutInflater)
+        binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+
+
+
+        wallViewModel = ViewModelProvider(this, WallViewModelFactory(WallRepo())).get(WallViewModel::class.java)
+
+
+        wallViewModel.getwallpaper().observe(viewLifecycleOwner) { it ->
+            binding.recycler.adapter = WallAdapter(requireContext(), it as ArrayList<WallModel>)
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment wall_fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            wall_fragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
-    }
-}
+        return binding.root
+}}

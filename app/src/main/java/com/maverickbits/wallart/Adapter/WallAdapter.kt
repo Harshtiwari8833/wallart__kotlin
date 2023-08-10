@@ -1,6 +1,7 @@
 package com.maverickbits.wallart.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class WallAdapter(private val context: Context,private val list :ArrayList<WallM
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.wall_layout,parent,false))
     }
 
@@ -28,7 +30,8 @@ class WallAdapter(private val context: Context,private val list :ArrayList<WallM
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
-        Glide.with(context).load(currentItem).into(holder.binding.wallImg)
+
+        Glide.with(context).load(currentItem.imgUrl).into(holder.binding.wallImg)
 
     }
 }
