@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#F7F7F7"
     tools:context=".Fragments.profile_fragment">
 
     <LinearLayout
@@ -36,13 +36,20 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/userImg"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/user"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:text="Hi!"
-                android:layout_marginTop="50dp"
-                android:id="@+id/user_name"
+                android:layout_marginTop="10dp"
+                android:id="@+id/userName"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="39dp"/>

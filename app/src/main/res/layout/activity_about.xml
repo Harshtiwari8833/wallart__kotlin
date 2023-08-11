@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F7F7F7"
     android:orientation="vertical"
     tools:context=".Activities.About_Activity">
 
@@ -40,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="About"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="40dp"
                 android:padding="20dp"/>
 
