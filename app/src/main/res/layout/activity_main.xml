@@ -5,8 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="#F7F7F7"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/nav_items"
+            android:background="#F7F7F7"
             android:id="@+id/btm_nav">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>

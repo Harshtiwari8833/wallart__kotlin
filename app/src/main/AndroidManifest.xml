@@ -12,10 +12,23 @@
         android:theme="@style/Theme.WallArt"
         tools:targetApi="31">
         <activity
-            android:name=".About_Activity"
+            android:name=".Activities.SigningWithGoogleActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.OpenWallActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.About_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

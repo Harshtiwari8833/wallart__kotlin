@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485478598428",
+    "project_id": "wall-art-kotlin",
+    "storage_bucket": "wall-art-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485478598428:android:d63e0801cf1266c561dcd9",
+        "android_client_info": {
+          "package_name": "com.maverickbits.wallart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485478598428-519fj9t2dq4idujk5i1qljflo7q5m4cu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtFFkBH07JByV0jlzjOjl2mcKJwpDnEOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485478598428-519fj9t2dq4idujk5i1qljflo7q5m4cu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
