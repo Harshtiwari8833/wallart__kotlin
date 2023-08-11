@@ -23,8 +23,6 @@ class category_fragment : Fragment() {
 
         }
 
-
-
         return binding.root
     }
 
