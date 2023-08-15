@@ -66,7 +66,7 @@
                     android:layout_height="175dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginBottom="15dp"
-                    android:id="@+id/card_nature">
+                    android:id="@+id/cardNature">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_city"
+                    android:id="@+id/cardCity"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -133,7 +133,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_animal"
+                    android:id="@+id/cardAnimal"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -168,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
                     android:layout_marginBottom="15dp"
-                    android:id="@+id/card_landscape"
+                    android:id="@+id/cardLandscape"
                     app:cardCornerRadius="15dp">
 
                     <FrameLayout
@@ -201,7 +201,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_amoled"
+                    android:id="@+id/cardAmoled"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -236,7 +236,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
                     android:layout_marginBottom="15dp"
-                    android:id="@+id/card_dark"
+                    android:id="@+id/cardDark"
                     app:cardCornerRadius="15dp"
                     >
 
@@ -270,7 +270,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_anime"
+                    android:id="@+id/cardAnime"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -305,7 +305,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_cars"
+                    android:id="@+id/cardCars"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -340,7 +340,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_sports"
+                    android:id="@+id/cardSports"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -373,7 +373,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_space"
+                    android:id="@+id/cardSpace"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -406,7 +406,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_superhero"
+                    android:id="@+id/cardSuperhero"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -440,7 +440,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_ios"
+                    android:id="@+id/cardIos"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -474,7 +474,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_solid"
+                    android:id="@+id/cardSolid"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp">
 
@@ -507,7 +507,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_abstract"
+                    android:id="@+id/cardAbstract"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -541,7 +541,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_shapes"
+                    android:id="@+id/cardShapes"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >
@@ -575,7 +575,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
-                    android:id="@+id/card_minimal"
+                    android:id="@+id/cardMinimal"
                     android:layout_marginBottom="15dp"
                     app:cardCornerRadius="15dp"
                     >

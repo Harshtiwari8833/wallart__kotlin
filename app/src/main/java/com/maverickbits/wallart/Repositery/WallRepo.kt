@@ -41,4 +41,27 @@ class WallRepo {
 
          return list
     }
+    val catList = mutableListOf < WallModel > ()
+    fun getCategory(category: String): LiveData<List<WallModel>>{
+
+        val list = MutableLiveData < List < WallModel >> ()
+          GlobalScope.launch(Dispatchers.IO){
+              WallCollection.whereEqualTo("cat",category).get().await()
+                .also {
+                    for (doc in it.documents) {
+                        val data = doc.toObject(WallModel::class.java)
+                        catList.add(data!!)
+                    }
+                }
+
+            withContext(Dispatchers.Main)
+            {
+                list.value = catList
+
+            }
+        }
+
+         return list
+    }
+
 }
