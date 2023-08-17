@@ -61,11 +61,13 @@ class SigningWithGoogleActivity : AppCompatActivity() {
         if (result.isSuccess) {
             val account = result.signInAccount
             val email = account!!.email
-
-
-
             val displayName = account.displayName
-            val photoUrl = account.photoUrl.toString()
+
+            val pref9 = getSharedPreferences("userEmail", MODE_PRIVATE)
+            val editor9 = pref9.edit()
+            editor9.putString("flag", email.toString())
+            editor9.apply()
+
 
             val pref = getSharedPreferences("userName", MODE_PRIVATE)
             pref.getString("flag", "")
@@ -81,7 +83,6 @@ class SigningWithGoogleActivity : AppCompatActivity() {
 
 
             val pref1 = getSharedPreferences("login" , MODE_PRIVATE)
-            val login = pref1.getBoolean("flag1", false)
             var editor1 = pref1.edit()
             editor1.putBoolean("flag1",true)
             editor1.apply()
