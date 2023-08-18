@@ -97,11 +97,17 @@ class WallRepo {
     fun getFavWallpapers(callback: (List<FavModel>) -> Unit) {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 val wallpapers = mutableListOf<FavModel>()
+                wallpapers.clear()
                 for (childSnapshot in snapshot.children) {
+                    val id = childSnapshot.child("id").getValue(String::class.java)
                     val url = childSnapshot.child("url").getValue(String::class.java)
-                    url?.let { wallpapers.add(FavModel(url)) }
-                }
+                    if (id != null && url != null) {
+                        wallpapers.add(FavModel(url, id))
+                    }
+                    }
+
                 callback(wallpapers)
             }
 

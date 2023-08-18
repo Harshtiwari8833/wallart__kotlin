@@ -46,6 +46,7 @@ class FavAdapter: ListAdapter<FavModel, FavAdapter.WallpaperViewHolder>(DiffCall
             wallpaperImageView.setOnClickListener {
                 val intent = Intent(itemView.context, OpenFavWallActivity::class.java)
                 intent.putExtra("wall_pos1",wallpaper.url)
+                intent.putExtra("wall_pos",wallpaper.id)
                 itemView.context.startActivity(intent)
             }
         }
