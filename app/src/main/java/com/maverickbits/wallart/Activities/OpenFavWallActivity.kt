@@ -37,7 +37,10 @@ class OpenFavWallActivity : AppCompatActivity() {
 
         val url = intent.getStringExtra("wall_pos1")
         val id = intent.getStringExtra("wall_pos")
-
+        val pref9 = getSharedPreferences("userEmail", AppCompatActivity.MODE_PRIVATE)
+        val email = pref9.getString("flag", "")
+        var index: Int = email!!.indexOf('@')
+        val parseEmail = email.substring(0, index)
 
         Glide.with(this).load(url).into(binding.favImg)
 
@@ -53,7 +56,7 @@ class OpenFavWallActivity : AppCompatActivity() {
 
             remove_fav!!.setOnClickListener {
                 val reference3 =
-                    FirebaseDatabase.getInstance().reference.child("users").child("harshtiwari8833")
+                    FirebaseDatabase.getInstance().reference.child("users").child(parseEmail)
                         .child("favouraite")
                 reference3.child(id!!).removeValue().addOnSuccessListener {
                     val fragment =
