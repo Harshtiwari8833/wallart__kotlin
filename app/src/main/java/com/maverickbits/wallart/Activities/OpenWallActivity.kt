@@ -27,7 +27,7 @@ class OpenWallActivity : AppCompatActivity() {
         openWallViewModel = ViewModelProvider(this, OpenWallViewModelFactory(WallRepo())).get(OpenWallViewModel ::class.java)
 
         openWallViewModel.getwallpaper().observe(this){
-            binding.viewPager.adapter = OpenWallAdapter(this, it as ArrayList<WallModel>)
+            binding.viewPager.adapter = OpenWallAdapter(this, it as ArrayList<WallModel>,this)
             binding.viewPager.setCurrentItem(pos, false)
         }
 

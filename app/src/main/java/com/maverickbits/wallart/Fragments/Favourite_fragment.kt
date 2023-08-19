@@ -48,14 +48,14 @@ class favourite_fragment : Fragment() {
         binding.recycleFav.adapter = adapter
         binding.recycleFav.setNestedScrollingEnabled(true)
 
-        wallpaperRepository.getFavWallpapers { wallpapers ->
+        wallpaperRepository.getFavWallpapers(parseEmail){ wallpapers ->
             adapter.submitList(wallpapers)
 
 
 
         }
         val database: DatabaseReference =
-            FirebaseDatabase.getInstance().reference.child("users").child("harshtiwari8833")
+            FirebaseDatabase.getInstance().reference.child("users").child(parseEmail)
                 .child("favouraite")
         childEventListener = object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -67,7 +67,7 @@ class favourite_fragment : Fragment() {
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                wallpaperRepository.getFavWallpapers { wallpapers ->
+                wallpaperRepository.getFavWallpapers(parseEmail) { wallpapers ->
                     adapter.submitList(wallpapers)
                 }
 

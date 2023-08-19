@@ -53,7 +53,7 @@ class category_fragment : Fragment() {
             sendcat("Space")
         }
         binding.cardSuperhero.setOnClickListener {
-            sendcat("Superheros")
+            sendcat("SuperHeros")
         }
         binding.cardIos.setOnClickListener {
             sendcat("ios")

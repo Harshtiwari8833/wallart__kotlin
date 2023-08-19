@@ -80,7 +80,7 @@ dependencies {
     implementation  "com.google.firebase:firebase-storage-ktx"
     implementation  "com.google.firebase:firebase-database-ktx"
 
-
+    implementation 'com.airbnb.android:lottie:6.1.0'
 //  implementation  'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01'
 
     //circular image view

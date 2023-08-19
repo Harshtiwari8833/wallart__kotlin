@@ -92,9 +92,10 @@ class WallRepo {
 //    }
 
 
-    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child("harshtiwari8833").child("favouraite")
 
-    fun getFavWallpapers(callback: (List<FavModel>) -> Unit) {
+
+    fun getFavWallpapers(email:String, callback: (List<FavModel>) -> Unit) {
+         val database: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child(email).child("favouraite")
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
