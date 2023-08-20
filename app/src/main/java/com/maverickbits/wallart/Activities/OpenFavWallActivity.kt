@@ -94,6 +94,7 @@ class OpenFavWallActivity : AppCompatActivity() {
 
                 val wallpaperManager = WallpaperManager.getInstance(this)
                 try {
+
                     wallpaperManager.setBitmap(wallpaperBitmap, null, true, wallpaperFlag)
                     val intent = Intent(this, WallpaperSetSucessActivity::class.java)
                     startActivity(intent)
