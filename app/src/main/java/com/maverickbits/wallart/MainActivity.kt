@@ -8,8 +8,9 @@ import com.maverickbits.wallart.Fragments.favourite_fragment
 import com.maverickbits.wallart.Fragments.profile_fragment
 import com.maverickbits.wallart.Fragments.wall_fragment
 import com.maverickbits.wallart.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

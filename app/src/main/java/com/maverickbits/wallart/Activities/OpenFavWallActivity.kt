@@ -11,15 +11,11 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
-import android.widget.Button
+
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.database.FirebaseDatabase
-import com.maverickbits.wallart.Fragments.favourite_fragment
-import com.maverickbits.wallart.R
+
 import com.maverickbits.wallart.databinding.ActivityOpenFavWallBinding
 
 class OpenFavWallActivity : AppCompatActivity() {

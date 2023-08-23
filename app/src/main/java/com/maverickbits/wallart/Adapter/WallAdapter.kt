@@ -3,53 +3,63 @@ package com.maverickbits.wallart.Adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
+
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.database.*
+
 import com.maverickbits.wallart.Activities.OpenWallActivity
-import com.maverickbits.wallart.Api.WallModel
+
 import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.WallLayoutBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.NonDisposableHandle.parent
 
-class WallAdapter(private val context: Context,private val list :ArrayList<Wallpaper>)
-    :RecyclerView.Adapter<WallAdapter.ViewHolder>() {
+
+class WallAdapter( val context: Context) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)
+{
 
         inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
         {
             val binding = WallLayoutBinding.bind(itemView)
         }
+    companion object {
+        private val COMPARATOR = object : DiffUtil. ItemCallback<Wallpaper>() {
+            override fun areItemsTheSame (oldItem: Wallpaper, newItem: Wallpaper): Boolean {
+                return oldItem._id == newItem._id
+            }
+            override fun areContentsTheSame(oldItem: Wallpaper, newItem: Wallpaper): Boolean{
+                return oldItem == newItem}
+        }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.wall_layout,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.wall_layout,parent,false))
     }
-
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val currentItem = list[position]
+        val currentItem = getItem(position)
 
-        Glide.with(context).load(currentItem.imgurl)
-//            .apply(RequestOptions().override(200, 270))
-            .centerCrop()
-            .into(holder.binding.wallImg)
+            Log.d("test", currentItem!!.imgurl.toString())
+
+        if (currentItem != null) {
+            Glide.with(context).load(currentItem.imgurl)
+    //            .apply(RequestOptions().override(200, 270))
+                .centerCrop()
+                .into(holder.binding.wallImg)
+        }
 
         holder.binding.wallcardView.setOnClickListener{
             val intent = Intent(context, OpenWallActivity ::class.java)
 
             intent.putExtra("wall_pos", position)
-            context.startActivity(intent)
+             context.startActivity(intent)
         }
 
 

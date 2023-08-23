@@ -1,6 +1,7 @@
 package com.maverickbits.wallart.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,13 +21,14 @@ import com.maverickbits.wallart.Repositery.WallRepo
 import com.maverickbits.wallart.ViewModel.WallViewModel
 import com.maverickbits.wallart.ViewModel.WallViewModelFactory
 import com.maverickbits.wallart.databinding.FragmentWallBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class wall_fragment : Fragment() {
 
    private lateinit var wallViewModel: WallViewModel
     private lateinit var binding: FragmentWallBinding
-
+    private lateinit var adapter:WallAdapter
 
 
     override fun onCreateView(
@@ -35,15 +37,18 @@ class wall_fragment : Fragment() {
     ): View? {
 
         binding = FragmentWallBinding.inflate(layoutInflater)
+        adapter = WallAdapter(requireContext())
         binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recycler.adapter = adapter
 
         val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
         val repository= WallRepo(apiInstance)
         wallViewModel = ViewModelProvider(this, WallViewModelFactory(repository)).get(WallViewModel::class.java)
 
-        wallViewModel.allWall.observe(viewLifecycleOwner, Observer {
+        wallViewModel.list.observe(viewLifecycleOwner, Observer {
 
-            binding.recycler.adapter=WallAdapter(requireContext(), it.wallpapers as ArrayList<Wallpaper>)
+            adapter.submitData(lifecycle, it)
+
 
         })
 
