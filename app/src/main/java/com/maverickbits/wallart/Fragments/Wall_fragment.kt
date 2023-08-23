@@ -21,6 +21,7 @@ import com.maverickbits.wallart.Repositery.WallRepo
 import com.maverickbits.wallart.ViewModel.WallViewModel
 import com.maverickbits.wallart.ViewModel.WallViewModelFactory
 import com.maverickbits.wallart.databinding.FragmentWallBinding
+import com.maverickbits.wallart.pagging.LoaderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -39,7 +40,10 @@ class wall_fragment : Fragment() {
         binding = FragmentWallBinding.inflate(layoutInflater)
         adapter = WallAdapter(requireContext())
         binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recycler.adapter = adapter
+        binding.recycler.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoaderAdapter(),
+            footer = LoaderAdapter()
+        )
 
         val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
         val repository= WallRepo(apiInstance)
