@@ -7,7 +7,7 @@ import com.maverickbits.wallart.Repositery.WallRepo
 class CategoryViewModelFactory(private val wallRepo: WallRepo) : ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>):T{
         if (modelClass.isAssignableFrom(CategoryViewModel::class.java)) {
-            return CategoryViewModel(WallRepo()) as T
+            return CategoryViewModel(wallRepo) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

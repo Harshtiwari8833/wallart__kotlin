@@ -7,7 +7,7 @@ import com.maverickbits.wallart.Repositery.WallRepo
 class OpenWallViewModelFactory(private val wallRepo: WallRepo): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OpenWallViewModel::class.java)) {
-            return OpenWallViewModel(WallRepo()) as T
+            return OpenWallViewModel(wallRepo) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

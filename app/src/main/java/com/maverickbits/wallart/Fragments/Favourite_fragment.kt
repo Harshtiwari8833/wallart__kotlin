@@ -24,7 +24,6 @@ class favourite_fragment : Fragment() {
 
     private lateinit var adapter: FavAdapter
     private val favWallpapersList = mutableListOf<FavModel>()
-    private val wallpaperRepository = WallRepo()
     private lateinit var binding: FragmentFavouriteBinding
     private lateinit var childEventListener: ChildEventListener
 
@@ -34,12 +33,12 @@ class favourite_fragment : Fragment() {
     ): View? {
         binding = FragmentFavouriteBinding.inflate(layoutInflater)
 
-
-        val pref9 =
-            requireContext().getSharedPreferences("userEmail", AppCompatActivity.MODE_PRIVATE)
-        val email = pref9.getString("flag", "")
-        var index: Int = email!!.indexOf('@')
-        val parseEmail = email.substring(0, index)
+//
+//        val pref9 =
+//            requireContext().getSharedPreferences("userEmail", AppCompatActivity.MODE_PRIVATE)
+//        val email = pref9.getString("flag", "")
+//        var index: Int = email!!.indexOf('@')
+//        val parseEmail = email.substring(0, index)
 
 
         adapter = FavAdapter()
@@ -48,57 +47,8 @@ class favourite_fragment : Fragment() {
         binding.recycleFav.adapter = adapter
         binding.recycleFav.setNestedScrollingEnabled(true)
 
-        wallpaperRepository.getFavWallpapers(parseEmail){ wallpapers ->
-            adapter.submitList(wallpapers)
-
-
-
-        }
-        val database: DatabaseReference =
-            FirebaseDatabase.getInstance().reference.child("users").child(parseEmail)
-                .child("favouraite")
-        childEventListener = object : ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                wallpaperRepository.getFavWallpapers(parseEmail) { wallpapers ->
-                    adapter.submitList(wallpapers)
-                }
-
-
-                }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                // This method is called when a child changes position in the list
-                // Handle the change in position
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // This method is called if the listener encounters an error
-                // Handle the error
-            }
-        }
-
-        // Add the child event listener to the database reference
-        database.addChildEventListener(childEventListener)
 
 
         return binding.root
     }
-    fun updateListAfterItemRemoval(wallpaperId: String) {
-        Toast.makeText(requireContext(), "hello", Toast.LENGTH_SHORT).show()
-        val updatedList = adapter.currentList.toMutableList()
-        val itemToRemove = updatedList.find { it.id == wallpaperId }
-        if (itemToRemove != null) {
-            updatedList.remove(itemToRemove)
-            adapter.submitList(updatedList)
-        }
-    }
-
-    }
+}

@@ -42,40 +42,28 @@ class OpenFavWallActivity : AppCompatActivity() {
         var index: Int = email!!.indexOf('@')
         val parseEmail = email.substring(0, index)
 
-        Glide.with(this).load(url).into(binding.favImg)
+//        Glide.with(this).load(url).into(binding.favImg)
 
         //bottom sheet
 
-        binding.favImg.setOnClickListener {
-
-            val bottomSheetDialog =
-                BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
-            bottomSheetDialog.setContentView(R.layout.favsetwallpaperdilog)
-
-            val remove_fav = bottomSheetDialog.findViewById<ImageView>(R.id.remove_fav)
-
-            remove_fav!!.setOnClickListener {
-                val reference3 =
-                    FirebaseDatabase.getInstance().reference.child("users").child(parseEmail)
-                        .child("favouraite")
-                reference3.child(id!!).removeValue().addOnSuccessListener {
-                    val fragment =
-                        supportFragmentManager.findFragmentByTag("favourite_fragment") as? favourite_fragment
-                    Log.d("OpenFavWallActivity", "Fragment found: ${fragment != null}")
-                    fragment?.updateListAfterItemRemoval(id)
-
-                    finish()
-                }
-            }
-            val set_wall = bottomSheetDialog.findViewById<Button>(R.id.set_wall)
-            set_wall!!.setOnClickListener{
-                showSetWallpaperDialog(binding.favImg)
-                bottomSheetDialog.dismiss()
-
-        }
-            bottomSheetDialog.show()
-
-    }
+//        binding.favImg.setOnClickListener {
+//
+//            val bottomSheetDialog =
+//                BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
+//            bottomSheetDialog.setContentView(R.layout.favsetwallpaperdilog)
+//
+//            val remove_fav = bottomSheetDialog.findViewById<ImageView>(R.id.remove_fav)
+//
+//
+//            val set_wall = bottomSheetDialog.findViewById<Button>(R.id.set_wall)
+//            set_wall!!.setOnClickListener{
+//                showSetWallpaperDialog(binding.favImg)
+//                bottomSheetDialog.dismiss()
+//
+//        }
+//            bottomSheetDialog.show()
+//
+//    }
 
     }
     private fun showSetWallpaperDialog(img:ImageView) {

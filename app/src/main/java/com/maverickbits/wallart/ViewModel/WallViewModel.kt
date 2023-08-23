@@ -3,25 +3,23 @@ package com.maverickbits.wallart.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.maverickbits.wallart.Models.WallModel
+import androidx.lifecycle.viewModelScope
+import com.maverickbits.wallart.Api.WallModel
 import com.maverickbits.wallart.Repositery.WallRepo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class WallViewModel(val repo: WallRepo) : ViewModel() {
-//    private val repo = WallRepo()
+class WallViewModel( private val repo : WallRepo) : ViewModel() {
 
-    private val _wallpapers = MutableLiveData<List<WallModel>>()
-    val wallpapers: LiveData<List<WallModel>> = _wallpapers
+    init {
 
-    fun loadInitialData(limit: Long) {
-        repo.getInitialData(limit) { wallpapers ->
-            _wallpapers.value = wallpapers
+        viewModelScope.launch(Dispatchers.IO){
+            repo.getAllWall()
+
         }
     }
 
-    fun loadMoreData(limit: Long) {
-        repo.loadMoreData(limit) { wallpapers ->
-            _wallpapers.value = (_wallpapers.value ?: emptyList()) + wallpapers
-        }
-    }
+    val allWall :LiveData<WallModel>
+    get() = repo.allWall
 }
