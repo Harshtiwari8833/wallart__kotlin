@@ -15,18 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maverickbits.wallart.Activities.WallpaperSetSucessActivity
-import com.maverickbits.wallart.Models.WallModel
+import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.EachWallpaperBinding
 
-class OpenWallAdapter (val context: Context, private val list : List<WallModel>,private val activity: AppCompatActivity)
+class OpenWallAdapter (val context: Context, private val list : List<Wallpaper>,private val activity: AppCompatActivity)
     : RecyclerView.Adapter<OpenWallAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OpenWallAdapter.ViewHolder {
         return ViewHolder( LayoutInflater.from(context).inflate(R.layout.each_wallpaper,parent,false))
     }
 
     override fun onBindViewHolder(holder: OpenWallAdapter.ViewHolder, position: Int) {
-        Glide.with(context).load(list[position].imgUrl).into(holder.binding.wallpaperImg)
+        Glide.with(context).load(list[position].imgurl).into(holder.binding.wallpaperImg)
         holder.binding.setWall.setOnClickListener {
             showSetWallpaperDialog(holder.binding.wallpaperImg,context,activity)
         }

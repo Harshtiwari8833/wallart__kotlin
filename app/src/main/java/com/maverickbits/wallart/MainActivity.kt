@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
         loadfragment(wallpaper)
 
         binding.btmNav.setOnItemSelectedListener {

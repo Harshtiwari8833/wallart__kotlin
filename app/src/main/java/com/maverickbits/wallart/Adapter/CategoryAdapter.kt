@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.maverickbits.wallart.Models.WallModel
+import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.WallLayoutBinding
 
-class CategoryAdapter(val context: Context, val list: ArrayList<WallModel> ):
+class CategoryAdapter(val context: Context, val list: ArrayList<Wallpaper> ):
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.wall_layout, parent, false))
     }
 
     override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
-        Glide.with(context).load(list[position].imgUrl)
+        Glide.with(context).load(list[position].imgurl)
             .apply(RequestOptions().override(200, 270))
             .centerCrop()
             .into(holder.binding.wallImg)
