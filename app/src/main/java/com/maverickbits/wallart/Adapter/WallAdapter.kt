@@ -100,6 +100,7 @@ class WallAdapter(private val context: Context,private val list :ArrayList<WallM
                     reference.setValue(hashMap)
                 }
 
+
             } else {
                 GlobalScope.launch(Dispatchers.IO) {
                     val reference3 =
@@ -115,4 +116,17 @@ class WallAdapter(private val context: Context,private val list :ArrayList<WallM
         })
 
     }
+//    fun updateData(newData: List<WallModel>) {
+//        list.clear()
+//        list.addAll(newData)
+//        notifyDataSetChanged()
+//    }
+fun updateData(newList: ArrayList<WallModel>) {
+    list.addAll(newList) // Add new items to the existing list
+    notifyDataSetChanged()
+}
+//fun updateData(newData: List<WallModel>) {
+////    list.addAll(newData) // Append new data to the existing list
+////    notifyDataSetChanged()
+//  }
 }
