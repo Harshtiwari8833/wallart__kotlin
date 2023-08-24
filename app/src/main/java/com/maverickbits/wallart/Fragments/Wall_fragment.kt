@@ -1,10 +1,13 @@
 package com.maverickbits.wallart.Fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,29 +41,61 @@ class wall_fragment : Fragment() {
     ): View? {
 
         binding = FragmentWallBinding.inflate(layoutInflater)
-        adapter = WallAdapter(requireContext())
-        binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recycler.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = LoaderAdapter(),
-            footer = LoaderAdapter()
-        )
 
-        val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
-        val repository= WallRepo(apiInstance)
-        wallViewModel = ViewModelProvider(this, WallViewModelFactory(repository)).get(WallViewModel::class.java)
+        adapter = WallAdapter(requireContext()){
+            val pref =
+                requireContext().getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
+            val check = pref.getBoolean("flag", false)
 
-        wallViewModel.list.observe(viewLifecycleOwner, Observer {
+            if (check) {
+                binding.loading.visibility = View.GONE
+                val editor = pref.edit()
+                editor.putBoolean("flag", false)
+                editor.apply()
+        }}
+//        {
+//
+//            val pref =
+//                requireContext().getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
+//            val check = pref.getBoolean("flag", false)
+//            if (check) {
+//                val editor = pref.edit()
+//                editor.putBoolean("flag", false)
+//                editor.apply()
+//
+//            }
 
-            adapter.submitData(lifecycle, it)
+            binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.recycler.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = LoaderAdapter(),
+                footer = LoaderAdapter()
+            )
+            //implementing loading animation
 
+//        val check = pref.getBoolean("flag", false)
+//        if (check){
+//
+//            val editor = pref.edit()
+//            editor.putBoolean("flag", false)
+//            editor.apply()
+//        }
 
-        })
+            val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
+            val repository = WallRepo(apiInstance)
+            wallViewModel = ViewModelProvider(
+                this,
+                WallViewModelFactory(repository)
+            ).get(WallViewModel::class.java)
+
+            wallViewModel.list.observe(viewLifecycleOwner, Observer {
+
+                adapter.submitData(lifecycle, it)
+
+            })
 
 
         return binding.root
-}
+        }
 
 
-
-
-}
+    }

@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 
@@ -21,7 +23,7 @@ import com.maverickbits.wallart.databinding.WallLayoutBinding
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 
-class WallAdapter( val context: Context) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)
+class WallAdapter( val context: Context,private val updateFlagCallback: () -> Unit) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)
 {
 
         inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
@@ -46,13 +48,17 @@ class WallAdapter( val context: Context) :PagingDataAdapter<Wallpaper,WallAdapte
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val currentItem = getItem(position)
 
-            Log.d("test", currentItem!!.imgurl.toString())
-
         if (currentItem != null) {
             Glide.with(context).load(currentItem.imgurl)
     //            .apply(RequestOptions().override(200, 270))
                 .centerCrop()
                 .into(holder.binding.wallImg)
+            val pref = context.getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
+            val editor = pref.edit()
+            editor.putBoolean("flag", true)
+            editor.apply()
+            updateFlagCallback.invoke()
+
         }
 
         holder.binding.wallcardView.setOnClickListener{
