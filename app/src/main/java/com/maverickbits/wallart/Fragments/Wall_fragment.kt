@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 class wall_fragment : Fragment() {
 
-   private lateinit var wallViewModel: WallViewModel
+    private lateinit var wallViewModel: WallViewModel
     private lateinit var binding: FragmentWallBinding
     private lateinit var adapter:WallAdapter
 
@@ -82,6 +82,7 @@ class wall_fragment : Fragment() {
 
             val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
             val repository = WallRepo(apiInstance)
+
             wallViewModel = ViewModelProvider(
                 this,
                 WallViewModelFactory(repository)

@@ -8,4 +8,10 @@ interface ApiInterface {
 
     @GET("/wall")
     suspend fun getAllWall(@Query("page") page: Int): WallModel
+
+    @GET("/wall")
+    suspend fun getWallpapers(@Query("page") page: Int): Response<WallModel>
+
+    @GET("/wall/cat")
+    suspend fun getCatWallpaper(@Query("cat") cat: String,@Query("page") page: Int): WallModel
 }

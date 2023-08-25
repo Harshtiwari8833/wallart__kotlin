@@ -27,5 +27,10 @@ class WallRepo @Inject constructor(private val apiInterface :ApiInterface){
         pagingSourceFactory = {WallPaggingSource(apiInterface)}
     ).liveData
 
+    fun getCatWalls()= Pager(
+        config = PagingConfig(pageSize = 10, maxSize = 100),
+        pagingSourceFactory = {WallPaggingSource(apiInterface)}
+    ).liveData
+
 }
 
