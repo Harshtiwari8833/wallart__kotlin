@@ -1,5 +1,6 @@
 package com.maverickbits.wallart.di
 
+import android.util.Log
 import com.google.gson.Gson
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.utils.Constants.BASE_URL
@@ -20,6 +21,7 @@ class NetworkModule {
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
     }
     @Singleton
     @Provides

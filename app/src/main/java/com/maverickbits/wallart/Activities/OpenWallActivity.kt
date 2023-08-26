@@ -39,7 +39,7 @@ class OpenWallActivity : AppCompatActivity() {
 
         viewModel.wallpapers.observe(this) { wallpapers ->
             if (wallpapers != null && wallpapers.isNotEmpty()) {
-                val adapter = OpenWallAdapter(this, wallpapers){
+                val adapter = OpenWallAdapter(this, wallpapers,this){
                     if (check){
                         binding.viewpagerLoader.visibility = View.GONE
                         val editor = pref.edit()

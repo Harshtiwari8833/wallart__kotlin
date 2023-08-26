@@ -19,7 +19,7 @@ import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.EachWallpaperBinding
 
-class OpenWallAdapter(val context:Context, private val list: List<Wallpaper>,private val updateFlagCallback: () -> Unit )
+class OpenWallAdapter(val context:Context, private val list: List<Wallpaper>,private val activity: AppCompatActivity,private val updateFlagCallback: () -> Unit )
     : RecyclerView.Adapter<OpenWallAdapter.ViewHolder>() {
     inner class ViewHolder(val itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = EachWallpaperBinding.bind(itemView)
@@ -31,7 +31,7 @@ class OpenWallAdapter(val context:Context, private val list: List<Wallpaper>,pri
         val currentItem = list[position]
         Glide.with(context).load(currentItem!!.imgurl).into(holder.binding.wallpaperImg)
         holder.binding.setWall.setOnClickListener {
-//            showSetWallpaperDialog(holder.binding.wallpaperImg,context,activity)
+            showSetWallpaperDialog(holder.binding.wallpaperImg,context,activity)
         }
         val pref = context.getSharedPreferences("animation_viewpager", AppCompatActivity.MODE_PRIVATE)
         val editor = pref.edit()

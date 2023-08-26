@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -20,7 +19,6 @@ import com.maverickbits.wallart.Activities.OpenWallActivity
 import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.WallLayoutBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 class WallAdapter( val context: Context,private val updateFlagCallback: () -> Unit) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)

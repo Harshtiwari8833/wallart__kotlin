@@ -2,10 +2,10 @@ package com.maverickbits.wallart.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maverickbits.wallart.Adapter.CategoryAdapter
-import com.maverickbits.wallart.Adapter.WallAdapter
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.ApiUtilities
 import com.maverickbits.wallart.Repositery.WallRepo
@@ -42,7 +42,9 @@ class CategoryActivity : AppCompatActivity() {
 
         catViewModel.list.observe(this){
             adapter.submitData(lifecycle, it)
+            Log.d("testing",it.toString())
         }
+
 
 
 
