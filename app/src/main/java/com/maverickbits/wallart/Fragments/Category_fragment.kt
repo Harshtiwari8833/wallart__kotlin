@@ -1,5 +1,6 @@
 package com.maverickbits.wallart
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -76,7 +77,10 @@ class category_fragment : Fragment() {
     }
      fun sendcat(cat: String){
          val intent  = Intent(requireContext(), CategoryActivity :: class.java)
-         intent.putExtra("key", cat)
+         val pref  = requireContext().getSharedPreferences("Category",MODE_PRIVATE )
+         val editor = pref.edit()
+         editor.putString("value", cat)
+         editor.apply()
          startActivity(intent)
      }
 }

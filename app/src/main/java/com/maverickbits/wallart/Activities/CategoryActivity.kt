@@ -3,6 +3,7 @@ package com.maverickbits.wallart.Activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,8 +27,19 @@ class CategoryActivity : AppCompatActivity() {
        binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.wallRecycler.layoutManager = GridLayoutManager(this, 2)
-       category = intent.getStringExtra("key").toString()
-        adapter = CategoryAdapter(this)
+
+        val pref  = getSharedPreferences("Category", MODE_PRIVATE )
+        category = pref.getString("value", "").toString()
+        adapter = CategoryAdapter(this){
+            val pref1 = getSharedPreferences("cat_animation", AppCompatActivity.MODE_PRIVATE)
+            val check = pref1.getBoolean("flag", false)
+            if (check) {
+                binding.loading.visibility = View.GONE
+                val editor1 = pref1.edit()
+                editor1.putBoolean("flag", false)
+                editor1.apply()
+            }
+        }
 
         binding.wallRecycler.layoutManager =GridLayoutManager(this, 2)
         binding.wallRecycler.adapter = adapter.withLoadStateHeaderAndFooter(

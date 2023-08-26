@@ -15,4 +15,6 @@ interface ApiInterface {
 
     @GET("/wall/cat")
     suspend fun getCatWallpaper(@Query("cat") cat: String, @Query("page") page: Int): CatModel
+    @GET("/wall/cat")
+    suspend fun getCat(@Query("cat") cat: String,@Query("page") page: Int): Response<CatModel>
 }
