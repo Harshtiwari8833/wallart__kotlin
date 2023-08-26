@@ -7,11 +7,11 @@ import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Models.CatModel
 import com.maverickbits.wallart.Models.CatWallpaper
 
-class WallCatPaggingSource(val apiInterface: ApiInterface) : PagingSource<Int, CatWallpaper>() {
+class WallCatPaggingSource(val apiInterface: ApiInterface, val category: String) : PagingSource<Int, CatWallpaper>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CatWallpaper> {
         return try{
             val position = params.key ?: 1
-            val response = apiInterface.getCatWallpaper("nature",position)
+            val response = apiInterface.getCatWallpaper(category,position)
 
 //            Log.d("test12",response.toString())
             LoadResult.Page(

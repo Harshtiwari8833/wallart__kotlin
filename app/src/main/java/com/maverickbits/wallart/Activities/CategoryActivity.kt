@@ -3,6 +3,7 @@ package com.maverickbits.wallart.Activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maverickbits.wallart.Adapter.CategoryAdapter
@@ -26,7 +27,6 @@ class CategoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.wallRecycler.layoutManager = GridLayoutManager(this, 2)
        category = intent.getStringExtra("key").toString()
-
         adapter = CategoryAdapter(this)
 
         binding.wallRecycler.layoutManager =GridLayoutManager(this, 2)
@@ -38,7 +38,7 @@ class CategoryActivity : AppCompatActivity() {
         val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
         val repository = WallRepo(apiInstance)
 
-        catViewModel = ViewModelProvider(this,CategoryViewModelFactory(repository)).get(CategoryViewModel::class.java)
+        catViewModel = ViewModelProvider(this,CategoryViewModelFactory(repository,category)).get(CategoryViewModel::class.java)
 
         catViewModel.list.observe(this){
             adapter.submitData(lifecycle, it)

@@ -9,8 +9,8 @@ import com.maverickbits.wallart.Repositery.WallRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class CategoryViewModel @Inject constructor(private val repo : WallRepo) : ViewModel() {
-      val list  = repo.getCatWalls().cachedIn(viewModelScope)
+
+class CategoryViewModel @Inject constructor(private val repo : WallRepo,val category:String) : ViewModel() {
+      val list  = repo.getCatWalls(category).cachedIn(viewModelScope)
 //      val list: LiveData<PagingData<CatModel>> = repo.getCatWalls().asLiveData().cachedIn(viewModelScope)
 }
