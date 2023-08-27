@@ -13,12 +13,17 @@ import androidx.recyclerview.widget.DiffUtil
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.maverickbits.wallart.Activities.OpenWallActivity
 
 import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.WallLayoutBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class WallAdapter( val context: Context,private val updateFlagCallback: () -> Unit) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)
@@ -47,9 +52,9 @@ class WallAdapter( val context: Context,private val updateFlagCallback: () -> Un
         val currentItem = getItem(position)
 
         if (currentItem != null) {
+
             Glide.with(context).load(currentItem.imgurl)
-    //            .apply(RequestOptions().override(200, 270))
-                .centerCrop()
+//                .apply(RequestOptions().override(1200, 200))
                 .into(holder.binding.wallImg)
             val pref = context.getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
             val editor = pref.edit()
