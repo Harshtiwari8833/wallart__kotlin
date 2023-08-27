@@ -1,15 +1,19 @@
 package com.maverickbits.wallart.pagging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.Wallpaper
 
+private const val TAG = "WallPaggingSource"
+
 class WallPaggingSource(val apiInterface: ApiInterface) : PagingSource<Int, Wallpaper>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Wallpaper> {
         return try{
+            Log.d(TAG, "load: ${params.key}")
             val position = params.key ?: 1
             val response = apiInterface.getAllWall(position)
             LoadResult.Page(

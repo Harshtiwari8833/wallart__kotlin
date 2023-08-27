@@ -24,7 +24,7 @@ class WallRepo @Inject constructor(private val apiInterface :ApiInterface){
 //    }
 
     fun getWalls()= Pager(
-        config = PagingConfig(pageSize = 10,maxSize = 150),
+        config = PagingConfig(pageSize = 10, prefetchDistance = 2),
         pagingSourceFactory = {WallPaggingSource(apiInterface)}
     ).liveData
 

@@ -26,11 +26,11 @@ class SplashActivity : AppCompatActivity() {
 
             val pref1 = getSharedPreferences("login" , MODE_PRIVATE)
             val login = pref1.getBoolean("flag1", false)
-            if (onboarding && !login) {
+            if (false) {
                 val mainIntent = Intent(this, SigningWithGoogleActivity::class.java)
                 startActivity(mainIntent)
                 finish()
-            }else if(login && onboarding){
+            }else if(true){
                 val mainIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainIntent)
                 finish()

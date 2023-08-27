@@ -27,6 +27,7 @@ import com.maverickbits.wallart.databinding.FragmentWallBinding
 import com.maverickbits.wallart.pagging.LoaderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "Wall_fragment"
 
 class wall_fragment : Fragment() {
 
@@ -84,15 +85,18 @@ class wall_fragment : Fragment() {
             val repository = WallRepo(apiInstance)
 
             wallViewModel = ViewModelProvider(
-                this,
+                requireActivity(),
                 WallViewModelFactory(repository)
             ).get(WallViewModel::class.java)
+
+        Log.d(TAG, "onCreateView: vm: ${wallViewModel}")
 
             wallViewModel.list.observe(viewLifecycleOwner, Observer {
 
                 adapter.submitData(lifecycle, it)
 
             })
+
 
 
         return binding.root
