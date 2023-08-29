@@ -1,6 +1,7 @@
 package com.maverickbits.wallart.Fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.TokenWatcher
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.maverickbits.wallart.Activities.About_Activity
+import com.maverickbits.wallart.Activities.Privacy_policy_Activity
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.FragmentProfileBinding
 
@@ -48,6 +50,30 @@ class profile_fragment : Fragment() {
             val iAbout = Intent (activity, About_Activity::class.java)
             startActivity(iAbout)
         }
+
+        binding.cardPolicy.setOnClickListener {
+
+           val iPolicy = Intent (activity, Privacy_policy_Activity::class.java)
+            startActivity(iPolicy)
+
+        }
+
+        binding.cardRate.setOnClickListener {
+            val uri = Uri.parse("https://play.google.com/store/apps/details?id=com.maverickbits.statussaverpro&pcampaignid=web_share")
+            val iRate = Intent(Intent.ACTION_VIEW,uri)
+            startActivity(iRate)
+        }
+
+        binding.cardShare.setOnClickListener {
+
+            val iShare = Intent(Intent.ACTION_SEND)
+            iShare.type = "text/plain"
+            iShare.putExtra(Intent.EXTRA_TEXT,"Share this amazing App: https://play.google.com/store/apps/details?id=com.maverickbits.statussaverpro&pcampaignid=web_share")
+            val chooser = Intent.createChooser(iShare,"Share via")
+            startActivity(chooser)
+
+        }
+
         return binding.root
 
     }
