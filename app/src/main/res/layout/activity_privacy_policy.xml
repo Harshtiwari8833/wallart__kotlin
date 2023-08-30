@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.Privacy_policy_Activity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:text="Privacy Policy"
+        android:textColor="@color/black"
+        android:textSize="39dp"
+        android:textStyle="bold"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Maverick Bits is committed to ensuring the privacy and security of your personal information when you use the WallArt Wallpaper App. This Privacy Policy explains how we collect, use, disclose, and protect your personal information, specifically your email address, when you create an account through the App."
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="1. Information We Collect:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="When you choose to create an account on the App, we collect your email address to establish and manage your account. We do not collect any other personal information from users of the App. We do not track, store, or analyze any data related to your WallArt activities."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="2. Device Permissions:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="The App does not require any type of permissions to function properly on your Android device."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="3. Advertising and Third-Party Services:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="The App does not display any third-party advertisements, and we do not integrate any third-party services that may collect your personal information. Your interactions with the App are limited to the core functionality of saving and accessing WhatsApp status updates."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="4. Security:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="We take reasonable measures to protect the data stored within the App on your device. However, it is essential for you to safeguard your device with a secure lock screen or password to prevent unauthorized access to WallArt and other data."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="5. Children's Privacy:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="The App is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children. If we become aware that we have inadvertently collected personal information from a child under the age of 13, we will take reasonable steps to delete such information."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="6. Changes to the Privacy Policy:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="We may update this Privacy Policy from time to time. The most current version will be reflected in the App and will be effective immediately upon posting. Your continued use of the App after any such changes constitutes your acceptance of the new Privacy Policy."
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="7. Contact Us:"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="If you have any questions or concerns about this Privacy Policy or our privacy practices, please contact us at maverickbits.official@gmail.com"
+                android:padding="10dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Please note that this Privacy Policy only applies to this WallArt Android Application and not to any other third-party websites or applications that you may access through links within the App. We encourage you to review the privacy policies of those third-party services before providing them with any personal information."
+                android:padding="10dp"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="By downloading, installing, and using the WallArt Android Application, you acknowledge that you have read and understood this Privacy Policy and agree to be bound by its terms and conditions."
+                android:padding="10dp"
+                android:layout_marginLeft="7dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:padding="10dp"
+                android:layout_marginLeft="7dp"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
