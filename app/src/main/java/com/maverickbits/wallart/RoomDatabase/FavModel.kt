@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "FavTable")
 data class FavModel(
-    @PrimaryKey(autoGenerate = true,)
-    val id :Int?,
-    @ColumnInfo("WallpaperId")val WallId:String?,
-    @ColumnInfo("ImageUrl")val imgurl: String?
+    @PrimaryKey
+    val WallId:String,
+    @ColumnInfo("ImageUrl")val imgurl: String?=null
 ):java.io.Serializable

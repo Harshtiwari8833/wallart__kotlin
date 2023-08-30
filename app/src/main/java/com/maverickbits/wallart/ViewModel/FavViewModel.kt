@@ -24,5 +24,6 @@ class FavViewModel(private val favRepository: FavRepository):ViewModel() {
 
     }
 
-    fun getAllFav()=favRepository.getAllFav
+
+    val list =favRepository.getAllFav
 }
