@@ -86,22 +86,19 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 
 
     }
-    fun updateList(newList:ArrayList<FavModel>){
-
-        fullList.clear()
-        fullList.addAll(newList)
-
-
-        list.clear()
-        list.addAll(fullList)
-        notifyDataSetChanged()
-
-
-    }
+//    fun updateList(newList:ArrayList<FavModel>){
+//
+//        fullList.clear()
+//        fullList.addAll(newList)
+//
+//        list.clear()
+//        list.addAll(fullList)
+//        notifyDataSetChanged()
+//    }
 
     interface FavClickListener{
 
-        fun onItemClick(imgUrl: String,id:String)
+        fun onItemClick(imgUrl: String,ImgId:String)
 
     }
 }

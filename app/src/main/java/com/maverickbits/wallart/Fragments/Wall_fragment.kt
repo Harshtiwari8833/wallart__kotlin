@@ -43,7 +43,7 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
         binding = FragmentWallBinding.inflate(layoutInflater)
 
-        adapter = WallAdapter(requireContext(),requireContext()){
+        adapter = WallAdapter(requireContext(),this){
             val pref =
                 requireContext().getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
             val check = pref.getBoolean("flag", false)
@@ -89,13 +89,7 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
         favViewModel=ViewModelProvider(requireActivity(),FavFactoryViewModel(favRepository))[FavViewModel::class.java]
 
-        favViewModel.getAllFav().observe(viewLifecycleOwner, Observer {list->
 
-            list?.let {
-                adapter.updateList(it as ArrayList<FavModel>)
-            }
-
-        })
 
             wallViewModel = ViewModelProvider(
                 requireActivity(),
@@ -116,7 +110,8 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
         }
 
     override fun onItemClick(imgUrl: String, id: String) {
-        favViewModel.insert()
+        val favModel = FavModel(id,imgUrl)
+        favViewModel.insert(favModel)
 
     }
 
