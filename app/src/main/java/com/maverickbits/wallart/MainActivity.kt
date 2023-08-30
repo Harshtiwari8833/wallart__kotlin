@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.collapsingToolBar)
+
+        setSupportActionBar(toolbar)
+
 
         loadfragment(wallpaper)
 
