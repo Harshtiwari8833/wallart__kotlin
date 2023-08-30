@@ -35,7 +35,7 @@
                 android:layout_height="match_parent">
 
 
-                <CheckBox
+                <ImageView
                     android:id="@+id/cbHeart"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -43,7 +43,7 @@
                     app:useMaterialThemeColors = "false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:button="@drawable/selector_wishlist_items"
+                    android:src="@drawable/fav_heart"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

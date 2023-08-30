@@ -1,40 +1,39 @@
 package com.maverickbits.wallart.Fragments
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.maverickbits.wallart.Adapter.WallAdapter
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.ApiUtilities
-import com.maverickbits.wallart.Api.WallModel
-import com.maverickbits.wallart.Api.Wallpaper
 
 import com.maverickbits.wallart.Repositery.WallRepo
+import com.maverickbits.wallart.RoomDatabase.FavDatabase
+import com.maverickbits.wallart.RoomDatabase.FavModel
+import com.maverickbits.wallart.RoomDatabase.FavRepository
+import com.maverickbits.wallart.ViewModel.FavFactoryViewModel
+import com.maverickbits.wallart.ViewModel.FavViewModel
 import com.maverickbits.wallart.ViewModel.WallViewModel
 import com.maverickbits.wallart.ViewModel.WallViewModelFactory
 import com.maverickbits.wallart.databinding.FragmentWallBinding
 import com.maverickbits.wallart.pagging.LoaderAdapter
-import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "Wall_fragment"
 
-class wall_fragment : Fragment() {
+class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
     private lateinit var wallViewModel: WallViewModel
     private lateinit var binding: FragmentWallBinding
     private lateinit var adapter:WallAdapter
+    private lateinit var favViewModel : FavViewModel
+
 
 
     override fun onCreateView(
@@ -44,7 +43,7 @@ class wall_fragment : Fragment() {
 
         binding = FragmentWallBinding.inflate(layoutInflater)
 
-        adapter = WallAdapter(requireContext()){
+        adapter = WallAdapter(requireContext(),requireContext()){
             val pref =
                 requireContext().getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
             val check = pref.getBoolean("flag", false)
@@ -85,6 +84,19 @@ class wall_fragment : Fragment() {
             val apiInstance = ApiUtilities.getInstance().create(ApiInterface::class.java)
             val repository = WallRepo(apiInstance)
 
+           val database = FavDatabase.getDatabase(requireContext()).getFavDao()
+           val favRepository = FavRepository(database)
+
+        favViewModel=ViewModelProvider(requireActivity(),FavFactoryViewModel(favRepository))[FavViewModel::class.java]
+
+        favViewModel.getAllFav().observe(viewLifecycleOwner, Observer {list->
+
+            list?.let {
+                adapter.updateList(it as ArrayList<FavModel>)
+            }
+
+        })
+
             wallViewModel = ViewModelProvider(
                 requireActivity(),
                 WallViewModelFactory(repository)
@@ -103,5 +115,10 @@ class wall_fragment : Fragment() {
         return binding.root
         }
 
+    override fun onItemClick(imgUrl: String, id: String) {
+        favViewModel.insert()
 
     }
+
+
+}
