@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.maverickbits.wallart.Activities.OpenFavWallActivity
-import com.maverickbits.wallart.Activities.OpenWallActivity
-import com.maverickbits.wallart.Models.FavModel
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.WallLayoutBinding
 

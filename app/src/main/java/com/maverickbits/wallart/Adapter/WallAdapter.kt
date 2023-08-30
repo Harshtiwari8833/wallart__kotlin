@@ -3,7 +3,6 @@ package com.maverickbits.wallart.Adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.maverickbits.wallart.Activities.OpenWallActivity
 
 import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
+import com.maverickbits.wallart.RoomDatabase.FavModel
 import com.maverickbits.wallart.databinding.WallLayoutBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +26,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class WallAdapter( val context: Context,private val updateFlagCallback: () -> Unit) :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR)
-{
+class WallAdapter(val context: Context, private val listener: FavClickListener, private val updateFlagCallback: () -> Unit)
+    :PagingDataAdapter<Wallpaper,WallAdapter.ViewHolder>(COMPARATOR) {
+
+    private val fullList=ArrayList<FavModel>()
+    private val list = ArrayList<FavModel>()
 
         inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
         {
@@ -72,6 +75,35 @@ class WallAdapter( val context: Context,private val updateFlagCallback: () -> Un
         }
 
 
+//        Implementing Fav
+
+
+        holder.binding.cbHeart.setOnClickListener {
+
+            currentItem?.let { it1 -> listener.onItemClick(it1.imgurl,it1._id) }
+        }
+
+
+
+    }
+    fun updateList(newList:ArrayList<FavModel>){
+
+        fullList.clear()
+        fullList.addAll(newList)
+
+
+        list.clear()
+        list.addAll(fullList)
+        notifyDataSetChanged()
+
+
+    }
+
+    interface FavClickListener{
+
+        fun onItemClick(imgUrl: String,id:String)
 
     }
 }
+
+

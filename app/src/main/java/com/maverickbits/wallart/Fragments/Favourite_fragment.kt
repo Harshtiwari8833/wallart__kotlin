@@ -1,6 +1,5 @@
 package com.maverickbits.wallart.Fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 
 import com.maverickbits.wallart.Adapter.FavAdapter
-import com.maverickbits.wallart.Models.FavModel
+import com.maverickbits.wallart.RoomDatabase.FavModel
 
 import com.maverickbits.wallart.databinding.FragmentFavouriteBinding
 
