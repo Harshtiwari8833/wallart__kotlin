@@ -1,7 +1,6 @@
 package com.maverickbits.wallart
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.maverickbits.wallart.Fragments.favourite_fragment
@@ -14,65 +13,42 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    var resourceId: Int = R.id.wall
-    val wallpaper = wall_fragment()
-    val category = category_fragment()
-    val favourite = favourite_fragment()
-    val profile = profile_fragment()
+    private val fragmentManager = supportFragmentManager
+    private lateinit var activeFragment: Fragment
+
+    private val wallpaper = wall_fragment()
+    private val category = category_fragment()
+    private val favourite = favourite_fragment()
+    private val profile = profile_fragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.collapsingToolBar)
 
         setSupportActionBar(toolbar)
 
+        // Set the initial fragment
+        activeFragment = wallpaper
+        fragmentManager.beginTransaction().add(R.id.frame, profile, "profile").hide(profile).commit()
+        fragmentManager.beginTransaction().add(R.id.frame, favourite, "favourite").hide(favourite).commit()
+        fragmentManager.beginTransaction().add(R.id.frame, category, "category").hide(category).commit()
+        fragmentManager.beginTransaction().add(R.id.frame, wallpaper, "wallpaper").commit()
 
-        loadfragment(wallpaper)
-
-        binding.btmNav.setOnItemSelectedListener {
-            when(it.itemId) {
-
-                R.id.wall -> loadfragment(wallpaper)
-                R.id.cat -> loadfragment(category)
-                R.id.fav -> loadfragment(favourite)
-                R.id.profile -> loadfragment(profile)
+        binding.btmNav.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.wall -> showFragment(wallpaper)
+                R.id.cat -> showFragment(category)
+                R.id.fav -> showFragment(favourite)
+                R.id.profile -> showFragment(profile)
             }
             true
         }
     }
 
-    private fun loadfragment( fragment:Fragment) {
-
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame, fragment)
-        fragmentTransaction.commit()
-    }
-
-    override fun onRestoreInstanceState(inState: Bundle) {
-        Log.d("hi", "onRestoreInstanceState: ")
-        // Restore the saved variables.
-
-        // Restore the saved variables.
-        resourceId = inState.getInt("fragmentType", R.id.wall)
-        if (resourceId == R.id.wall) {
-            loadfragment(wallpaper)
-        } else if (resourceId == R.id.cat) {
-            loadfragment(category)
-        } else if (resourceId == R.id.fav) {
-            loadfragment(favourite)
-        } else {
-            loadfragment(profile)
-        }
-        binding.btmNav.setSelectedItemId(resourceId)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-
-        // Save the variables.
-        outState.putInt("fragmentType", resourceId)
-        super.onSaveInstanceState(outState)
+    private fun showFragment(fragment: Fragment) {
+        fragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
+        activeFragment = fragment
     }
 }
