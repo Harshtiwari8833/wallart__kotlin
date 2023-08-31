@@ -1,5 +1,6 @@
 package com.maverickbits.wallart.ViewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.maverickbits.wallart.RoomDatabase.FavModel
 import com.maverickbits.wallart.RoomDatabase.FavRepository
@@ -24,6 +25,6 @@ class FavViewModel(private val favRepository: FavRepository):ViewModel() {
 
     }
 
+val list: LiveData<List<FavModel>> = favRepository.getAllFav
 
-    val list =favRepository.getAllFav
 }

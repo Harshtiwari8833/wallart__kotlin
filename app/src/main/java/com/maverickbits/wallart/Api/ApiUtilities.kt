@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiUtilities {
 
-    private const val BASE_URL="https://blushing-sneakers-lamb.cyclic.cloud/"
+    private const val BASE_URL="https://wallrestapi-production.up.railway.app/"
     fun getInstance(): Retrofit {
 
         return Retrofit.Builder()
