@@ -1,5 +1,6 @@
 package com.maverickbits.wallart.Fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.maverickbits.wallart.Adapter.WallAdapter
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.ApiUtilities
+import com.maverickbits.wallart.R
 
 import com.maverickbits.wallart.Repositery.WallRepo
 import com.maverickbits.wallart.RoomDatabase.FavDatabase
@@ -33,6 +35,8 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
     private lateinit var binding: FragmentWallBinding
     private lateinit var adapter:WallAdapter
     private lateinit var favViewModel : FavViewModel
+    private lateinit var dialog: Dialog
+
 
 
 
@@ -43,13 +47,19 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
         binding = FragmentWallBinding.inflate(layoutInflater)
 
+        dialog= Dialog(requireContext(),R.style.TransparentDialog)
+        dialog.setContentView(R.layout.progress_dialog)
+        dialog.setCancelable(false)
+        dialog.show()
+
         adapter = WallAdapter(requireContext(),this){
             val pref =
                 requireContext().getSharedPreferences("animation", AppCompatActivity.MODE_PRIVATE)
             val check = pref.getBoolean("flag", false)
 
             if (check) {
-                binding.loading.visibility = View.GONE
+//               binding.loading.visibility = View.GONE
+                dialog.dismiss()
                 val editor = pref.edit()
                 editor.putBoolean("flag", false)
                 editor.apply()

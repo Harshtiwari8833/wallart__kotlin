@@ -64,6 +64,7 @@ class FavAdapter: ListAdapter<FavModel, FavAdapter.WallpaperViewHolder>(DiffCall
         val wallpaper = getItem(position)
         holder.bind(wallpaper)
         holder.click(wallpaper)
+
     }
 }
 

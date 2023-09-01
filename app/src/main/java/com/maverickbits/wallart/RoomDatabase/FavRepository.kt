@@ -13,7 +13,7 @@ class FavRepository(private val favDao: FavDao) {
 
 
     suspend fun delete(favModel: FavModel){
-
         favDao.deleteFav(favModel)
     }
+
 }
