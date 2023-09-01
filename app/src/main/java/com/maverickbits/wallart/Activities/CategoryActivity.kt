@@ -1,5 +1,6 @@
 package com.maverickbits.wallart.Activities
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.maverickbits.wallart.Adapter.CategoryAdapter
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.ApiUtilities
+import com.maverickbits.wallart.R
 import com.maverickbits.wallart.Repositery.WallRepo
 import com.maverickbits.wallart.ViewModel.CategoryViewModel
 import com.maverickbits.wallart.ViewModel.CategoryViewModelFactory
@@ -22,11 +24,18 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var category : String
     private lateinit var adapter: CategoryAdapter
     private  lateinit var catViewModel : CategoryViewModel
+    private lateinit var dialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.wallRecycler.layoutManager = GridLayoutManager(this, 2)
+
+        dialog= Dialog(this, R.style.TransparentDialog)
+        dialog.setContentView(R.layout.progress_dialog)
+        dialog.setCancelable(false)
+        dialog.show()
 
         val pref  = getSharedPreferences("Category", MODE_PRIVATE )
         category = pref.getString("value", "").toString()
@@ -34,7 +43,8 @@ class CategoryActivity : AppCompatActivity() {
             val pref1 = getSharedPreferences("cat_animation", AppCompatActivity.MODE_PRIVATE)
             val check = pref1.getBoolean("flag", false)
             if (check) {
-                binding.loading.visibility = View.GONE
+//                binding.loading.visibility = View.GONE
+                dialog.dismiss()
                 val editor1 = pref1.edit()
                 editor1.putBoolean("flag", false)
                 editor1.apply()
