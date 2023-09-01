@@ -3,6 +3,7 @@ package com.maverickbits.wallart.Adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +32,10 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 
     private val fullList=ArrayList<FavModel>()
     private val list = ArrayList<FavModel>()
+    private lateinit var sharedPref : SharedPreferences
 
-        inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
+
+    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
         {
             val binding = WallLayoutBinding.bind(itemView)
         }
@@ -78,9 +81,24 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 //        Implementing Fav
 
 
+        sharedPref = context.getSharedPreferences("FavPref",Context.MODE_PRIVATE)
+        val check = sharedPref.getBoolean("key",false)
+
+
         holder.binding.cbHeart.setOnClickListener {
 
-            currentItem?.let { it1 -> listener.onItemClick(it1.imgurl,it1._id) }
+
+            if(check) {
+
+                val edit = sharedPref.edit()
+                edit.putBoolean("key",false)
+            }
+
+            else {
+                currentItem?.let { it1 -> listener.onItemClick(it1.imgurl,it1._id) }
+
+
+            }
         }
 
 
