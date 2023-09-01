@@ -31,12 +31,12 @@ class OpenFavWallActivity : AppCompatActivity() {
         val binding = ActivityOpenFavWallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val url = intent.getStringExtra("wall_pos1")
-        val id = intent.getStringExtra("wall_pos")
-        val pref9 = getSharedPreferences("userEmail", AppCompatActivity.MODE_PRIVATE)
-        val email = pref9.getString("flag", "")
-        var index: Int = email!!.indexOf('@')
-        val parseEmail = email.substring(0, index)
+//        val url = intent.getStringExtra("wall_pos1")
+//        val id = intent.getStringExtra("wall_pos")
+//        val pref9 = getSharedPreferences("userEmail", AppCompatActivity.MODE_PRIVATE)
+//        val email = pref9.getString("flag", "")
+//        var index: Int = email!!.indexOf('@')
+//        val parseEmail = email.substring(0, index)
 
 //        Glide.with(this).load(url).into(binding.favImg)
 

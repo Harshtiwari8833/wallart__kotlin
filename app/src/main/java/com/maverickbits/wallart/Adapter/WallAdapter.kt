@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -70,6 +71,7 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 
         }
 
+
         holder.binding.wallcardView.setOnClickListener{
             val intent = Intent(context, OpenWallActivity ::class.java)
 
@@ -81,27 +83,55 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 //        Implementing Fav
 
 
-        sharedPref = context.getSharedPreferences("FavPref",Context.MODE_PRIVATE)
-        val check = sharedPref.getBoolean("key",false)
 
 
-        holder.binding.cbHeart.setOnClickListener {
+        holder.binding.cbHeart.setBackgroundResource(R.drawable.fav_heart)
 
+        if (currentItem != null) {
+           val sharedPref1: SharedPreferences = context.getSharedPreferences("FavPref", Context.MODE_PRIVATE)
+            // Load the favorite state from SharedPreferences
+            val isFavorite = sharedPref1.getBoolean(currentItem._id, false)
 
-            if(check) {
-
-                val edit = sharedPref.edit()
-                edit.putBoolean("key",false)
+            // Set the heart icon based on the favorite state
+            if (isFavorite) {
+                holder.binding.cbHeart.setBackgroundResource(R.drawable.filled_fav_heart)
+            } else {
+                holder.binding.cbHeart.setBackgroundResource(R.drawable.fav_heart)
             }
 
-            else {
-                currentItem?.let { it1 -> listener.onItemClick(it1.imgurl,it1._id) }
+            // ...
 
+            holder.binding.cbHeart.setOnClickListener {
+                val sharedPref1: SharedPreferences = context.getSharedPreferences("FavPref", Context.MODE_PRIVATE)
+                val isFavorite = sharedPref1.getBoolean(currentItem._id, false)
+                if (isFavorite) {
+                    // Set the heart icon as gray immediately
+                    holder.binding.cbHeart.setBackgroundResource(R.drawable.fav_heart)
+                    // Toggle the favorite state in SharedPreferences
+                    val editor = sharedPref1.edit()
+                    editor.putBoolean(currentItem._id, false)
+                    editor.apply()
+//                   Toast.makeText(context, "Removed",Toast.LENGTH_SHORT).show()
+                    // Perform the removal action (e.g., notify the listener)
+                    listener.onItemDelete(currentItem.imgurl, currentItem._id)
+                } else {
+                    // Set the heart icon as red immediately
+                    holder.binding.cbHeart.setBackgroundResource(R.drawable.filled_fav_heart)
+//                    Toast.makeText(context, "added",Toast.LENGTH_SHORT).show()
+                    // Toggle the favorite state in SharedPreferences
+                    val editor = sharedPref1.edit()
+                    editor.putBoolean(currentItem._id, true)
+                    editor.apply()
 
+                    // Perform the addition action (e.g., notify the listener)
+                    listener.onItemClick(currentItem.imgurl, currentItem._id)
+                }
             }
+
+            // ...
+
+            // ...
         }
-
-
 
     }
 //    fun updateList(newList:ArrayList<FavModel>){
@@ -117,6 +147,7 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
     interface FavClickListener{
 
         fun onItemClick(imgUrl: String,ImgId:String)
+        fun onItemDelete(imgUrl: String,ImgId:String)
 
     }
 }

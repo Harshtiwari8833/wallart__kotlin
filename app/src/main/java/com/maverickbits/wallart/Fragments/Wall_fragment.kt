@@ -125,5 +125,10 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
     }
 
+    override fun onItemDelete(imgUrl: String, ImgId: String) {
+        val favModel = FavModel(ImgId,imgUrl)
+        favViewModel.delete(favModel)
+    }
+
 
 }
