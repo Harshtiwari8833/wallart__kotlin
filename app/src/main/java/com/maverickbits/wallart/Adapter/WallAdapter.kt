@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.init
 import com.bumptech.glide.request.RequestOptions
 
 import com.maverickbits.wallart.Activities.OpenWallActivity
@@ -35,9 +36,9 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
     private val list = ArrayList<FavModel>()
     private lateinit var sharedPref : SharedPreferences
 
-
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
         {
+
             val binding = WallLayoutBinding.bind(itemView)
         }
     companion object {
@@ -51,6 +52,7 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
 
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.wall_layout,parent,false))
     }
@@ -88,6 +90,8 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
         holder.binding.cbHeart.setBackgroundResource(R.drawable.fav_heart)
 
         if (currentItem != null) {
+
+
            val sharedPref1: SharedPreferences = context.getSharedPreferences("FavPref", Context.MODE_PRIVATE)
             // Load the favorite state from SharedPreferences
             val isFavorite = sharedPref1.getBoolean(currentItem._id, false)
@@ -134,6 +138,8 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
         }
 
     }
+
+
 //    fun updateList(newList:ArrayList<FavModel>){
 //
 //        fullList.clear()
