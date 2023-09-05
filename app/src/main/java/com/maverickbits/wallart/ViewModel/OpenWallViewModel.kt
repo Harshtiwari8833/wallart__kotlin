@@ -10,8 +10,10 @@ import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.Repositery.OpenWallRepo
 import com.maverickbits.wallart.Repositery.WallRepo
 import com.maverickbits.wallart.Repositery.openWallRepotwo
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class OpenWallViewModel(private val repository: openWallRepotwo) : ViewModel() {
+
+class OpenWallViewModel(private val repository: WallRepo) : ViewModel() {
 
 //    val list = repo.getOpenWalls().cachedIn(viewModelScope)
 //private val service: ApiInterface = retrofit.create(ApiInterface::class.java)
@@ -44,5 +46,13 @@ class OpenWallViewModel(private val repository: openWallRepotwo) : ViewModel() {
 //        _wallpapers.postValue(allWallpapers)
 //    }
 
-    val wallpapers: LiveData<List<Wallpaper>> = repository.getAllWallpapers()
+
+
+    //...
+
+//...fectch data on the basis of pages
+    val list = repository.getOpenWalls().cachedIn(viewModelScope)
+
+    //...fetchinf all wallpaer at once
+//    val wallpapers: LiveData<List<Wallpaper>> = repository.getAllWallpapers()
 }

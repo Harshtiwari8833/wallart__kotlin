@@ -6,12 +6,15 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.maverickbits.wallart.Activities.WallpaperSetSucessActivity
@@ -19,16 +22,27 @@ import com.maverickbits.wallart.Api.Wallpaper
 import com.maverickbits.wallart.R
 import com.maverickbits.wallart.databinding.EachWallpaperBinding
 
-class OpenWallAdapter(val context:Context, private val list: List<Wallpaper>,private val activity: AppCompatActivity,private val updateFlagCallback: () -> Unit )
-    : RecyclerView.Adapter<OpenWallAdapter.ViewHolder>() {
+class OpenWallAdapter(val context:Context,private val activity: AppCompatActivity,private val updateFlagCallback: () -> Unit )
+    : PagingDataAdapter<Wallpaper, OpenWallAdapter.ViewHolder>(COMPARATOR) {
     inner class ViewHolder(val itemView: View): RecyclerView.ViewHolder(itemView) {
         val binding = EachWallpaperBinding.bind(itemView)
 
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    companion object {
+        private val COMPARATOR = object : DiffUtil. ItemCallback<Wallpaper>() {
+            override fun areItemsTheSame (oldItem: Wallpaper, newItem: Wallpaper): Boolean {
+                return oldItem._id == newItem._id
+            }
+            override fun areContentsTheSame(oldItem: Wallpaper, newItem: Wallpaper): Boolean{
+                return oldItem == newItem}
+        }
+    }
 
-        val currentItem = list[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("lifecycle","in bind view")
+
+        val currentItem = getItem(position)
         Glide.with(context).load(currentItem!!.imgurl).into(holder.binding.wallpaperImg)
         holder.binding.setWall.setOnClickListener {
             showSetWallpaperDialog(holder.binding.wallpaperImg,context,activity)
@@ -37,16 +51,15 @@ class OpenWallAdapter(val context:Context, private val list: List<Wallpaper>,pri
         val editor = pref.edit()
         editor.putBoolean("flag1", true)
         editor.apply()
-        updateFlagCallback.invoke()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OpenWallAdapter.ViewHolder {
+        Log.d("lifecycle","in oncreateviewholder")
+        updateFlagCallback.invoke()
         return ViewHolder( LayoutInflater.from(context).inflate(R.layout.each_wallpaper,parent,false))
     }
 
-    override fun getItemCount(): Int {
-       return list.size
-    }
 
 
 }

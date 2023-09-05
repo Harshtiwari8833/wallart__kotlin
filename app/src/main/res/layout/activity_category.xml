@@ -60,12 +60,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="60dp"
+                        android:id="@+id/heading"
                         android:text="Free Walls"
                         android:textColor="@color/black"
                         android:textSize="39dp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"

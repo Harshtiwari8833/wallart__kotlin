@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.init
 import com.bumptech.glide.request.RequestOptions
+import com.maverickbits.wallart.Activities.OpenOneWallActivity
 
 import com.maverickbits.wallart.Activities.OpenWallActivity
 
@@ -35,6 +36,7 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
     private val fullList=ArrayList<FavModel>()
     private val list = ArrayList<FavModel>()
     private lateinit var sharedPref : SharedPreferences
+
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
         {
@@ -73,19 +75,16 @@ class WallAdapter(val context: Context, private val listener: FavClickListener, 
 
         }
 
-
+      // click listner to open thte wallpaper
         holder.binding.wallcardView.setOnClickListener{
-            val intent = Intent(context, OpenWallActivity ::class.java)
+            val intent = Intent(context, OpenOneWallActivity ::class.java)
 
-            intent.putExtra("wall_pos", position)
+            intent.putExtra("imgUrl", currentItem!!.imgurl)
              context.startActivity(intent)
         }
 
 
 //        Implementing Fav
-
-
-
 
         holder.binding.cbHeart.setBackgroundResource(R.drawable.fav_heart)
 

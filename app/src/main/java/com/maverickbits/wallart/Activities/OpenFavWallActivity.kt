@@ -69,7 +69,13 @@ class OpenFavWallActivity: AppCompatActivity() {
             val remove_fav = bottomSheetDialog.findViewById<ImageView>(R.id.remove_fav)
 
             remove_fav!!.setOnClickListener {
+
                 val sharedPref1: SharedPreferences = getSharedPreferences("FavPref", Context.MODE_PRIVATE)
+                val Pref: SharedPreferences = getSharedPreferences("deleteFav", Context.MODE_PRIVATE)
+                val editor1 = Pref.edit()
+                editor1.putBoolean("value", true)
+                editor1.apply()
+
                 val favModel = FavModel(id!!,url)
                 favViewModel.delete(favModel)
                 val editor = sharedPref1.edit()

@@ -1,6 +1,8 @@
 package com.maverickbits.wallart.Fragments
 
 import android.app.Dialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -133,6 +135,17 @@ class wall_fragment : Fragment(),WallAdapter.FavClickListener {
 
     override fun onResume() {
         super.onResume()
-        binding.recycler.adapter = adapter
+        val Pref: SharedPreferences = requireContext().getSharedPreferences("deleteFav", Context.MODE_PRIVATE)
+        val check = Pref.getBoolean("value",false)
+        if (check){
+            binding.recycler.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = LoaderAdapter(),
+                footer = LoaderAdapter()
+            )
+            val editor1 = Pref.edit()
+            editor1.putBoolean("value", false)
+            editor1.apply()
+        }
+
     }
 }

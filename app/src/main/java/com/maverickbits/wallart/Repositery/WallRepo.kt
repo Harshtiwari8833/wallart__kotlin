@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.maverickbits.wallart.Api.ApiInterface
 import com.maverickbits.wallart.Api.WallModel
+import com.maverickbits.wallart.pagging.OpenWallPagingSource
 import com.maverickbits.wallart.pagging.WallCatPaggingSource
 import com.maverickbits.wallart.pagging.WallPaggingSource
 import javax.inject.Inject
@@ -26,6 +27,11 @@ class WallRepo @Inject constructor(private val apiInterface :ApiInterface){
     fun getWalls()= Pager(
         config = PagingConfig(pageSize = 10, prefetchDistance = 2),
         pagingSourceFactory = {WallPaggingSource(apiInterface)}
+    ).liveData
+
+    fun getOpenWalls()= Pager(
+        config = PagingConfig(pageSize = 10, prefetchDistance = 2),
+        pagingSourceFactory = {OpenWallPagingSource(apiInterface)}
     ).liveData
 
 

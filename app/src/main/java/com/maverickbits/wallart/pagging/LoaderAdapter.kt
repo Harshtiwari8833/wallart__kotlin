@@ -1,5 +1,6 @@
 package com.maverickbits.wallart.pagging
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: LoaderViewHolder, loadState: LoadState) {
+        Log.d("checkloder","hiii")
         holder.bind(loadState)
     }
 
