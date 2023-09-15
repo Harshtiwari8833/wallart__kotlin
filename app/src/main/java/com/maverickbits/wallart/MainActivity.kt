@@ -1,7 +1,15 @@
 package com.maverickbits.wallart
 
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.os.Bundle
+import android.service.voice.VoiceInteractionSession.VisibleActivityCallback
+import android.view.View
+import android.view.View.GONE
+import android.widget.Button
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet.VISIBLE
 import androidx.fragment.app.Fragment
 import com.maverickbits.wallart.Fragments.favourite_fragment
 import com.maverickbits.wallart.Fragments.profile_fragment
@@ -16,6 +24,10 @@ class MainActivity : AppCompatActivity() {
     private val fragmentManager = supportFragmentManager
     private lateinit var activeFragment: Fragment
 
+    private lateinit var internetLayout : RelativeLayout
+    private lateinit var noInternetLayout : RelativeLayout
+    private lateinit var btn_tryAgain : Button
+
     private val wallpaper = wall_fragment()
     private val category = category_fragment()
     private val favourite = favourite_fragment()
@@ -26,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.collapsingToolBar)
+
+        internetLayout = findViewById(R.id.internetLayout)
+        noInternetLayout = findViewById(R.id.noInternetLayout)
+        btn_tryAgain = findViewById(R.id.btn_tryAgain)
+
+
 
         setSupportActionBar(toolbar)
 
@@ -45,10 +63,37 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+
+        drawLayout()
+        btn_tryAgain.setOnClickListener{
+            drawLayout()
+        }
+    }
+
+    private fun isNetworkAvailable() : Boolean{
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
+
+        return (capabilities != null && capabilities.hasCapability(NET_CAPABILITY_INTERNET))
+    }
+
+    private fun drawLayout(){
+        if(isNetworkAvailable()){
+            internetLayout.visibility = View.VISIBLE
+            noInternetLayout.visibility = GONE
+        }
+
+        else{
+            noInternetLayout.visibility = View.VISIBLE
+            internetLayout.visibility = GONE
+        }
     }
 
     private fun showFragment(fragment: Fragment) {
         fragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
         activeFragment = fragment
     }
+
+
 }
