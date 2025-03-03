@@ -1,94 +1,79 @@
 package com.maverickbits.wallart.Activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.common.api.ApiException
 import com.maverickbits.wallart.MainActivity
 import com.maverickbits.wallart.R
 
 class SigningWithGoogleActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private val GOOGLE_REQ_CODE = 123
+    private val token="83148076889-v57in5ca1hrht4koci995kusun51v4ep.apps.googleusercontent.com"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signing_with_google)
-        val gso =  GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+
+
+        // Configure Google Sign-In with new OAuth Client ID
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken("YOUR_NEW_CLIENT_ID.apps.googleusercontent.com") // Replace with actual OAuth Client ID
+//            .requestIdToken(token) // Replace with actual OAuth Client ID
             .requestEmail()
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-
-        val siginbtn = findViewById<Button>(R.id.button)
-
-        siginbtn.setOnClickListener {
-            sigIn()
+        val signInBtn = findViewById<Button>(R.id.button)
+        signInBtn.setOnClickListener {
+            signIn()
         }
-
-
     }
 
-    fun sigIn(){
+    private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_REQ_CODE)
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == GOOGLE_REQ_CODE) {
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(
-                data!!
-            )
-            handleSignInResult(result!!)
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                handleSignInResult(account)
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Sign-in failed: ${e.statusCode}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-
-
-    private fun handleSignInResult(result: GoogleSignInResult) {
-        if (result.isSuccess) {
-            val account = result.signInAccount
-            val email = account!!.email
+    private fun handleSignInResult(account: GoogleSignInAccount?) {
+        if (account != null) {
+            val email = account.email
             val displayName = account.displayName
 
-            val pref9 = getSharedPreferences("userEmail", MODE_PRIVATE)
-            val editor9 = pref9.edit()
-            editor9.putString("flag", email.toString())
-            editor9.apply()
-
-
-            val pref = getSharedPreferences("userName", MODE_PRIVATE)
-            pref.getString("flag", "")
-            val editor = pref.edit()
-            editor.putString("flag", displayName.toString())
-            editor.apply()
-
-            val pref3 = getSharedPreferences("userImg", MODE_PRIVATE)
-            val editor3 = pref3.edit()
-            editor3.putString("img", account.photoUrl.toString())
-            editor3.apply()
+            val sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE).edit()
+            sharedPreferences.putString("userEmail", email)
+            sharedPreferences.putString("userName", displayName)
+            sharedPreferences.putString("userImg", account.photoUrl.toString())
+            sharedPreferences.putBoolean("isLoggedIn", true)
+            sharedPreferences.apply()
 
 
 
-            val pref1 = getSharedPreferences("login" , MODE_PRIVATE)
-            var editor1 = pref1.edit()
-            editor1.putBoolean("flag1",true)
-            editor1.apply()
 
-
-            val intent = Intent(this, MainActivity::class.java)
-            Toast.makeText(this, "signed in as: $email", Toast.LENGTH_SHORT).show()
-            startActivity(intent)
+            Toast.makeText(this, "Signed in as: $email", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
             Toast.makeText(this, "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show()

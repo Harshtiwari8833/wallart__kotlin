@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet.VISIBLE
 import androidx.fragment.app.Fragment
 import com.maverickbits.wallart.Fragments.favourite_fragment
-import com.maverickbits.wallart.Fragments.profile_fragment
+import com.maverickbits.wallart.Fragments.ProfileFragment
 import com.maverickbits.wallart.Fragments.wall_fragment
 import com.maverickbits.wallart.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val wallpaper = wall_fragment()
     private val category = category_fragment()
     private val favourite = favourite_fragment()
-    private val profile = profile_fragment()
+    private val profile = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

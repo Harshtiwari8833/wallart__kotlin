@@ -2,46 +2,43 @@ package com.maverickbits.wallart.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.maverickbits.wallart.MainActivity
 import com.maverickbits.wallart.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val w = window
-        w.setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        lifecycleScope.launch {
+            delay(1500)
+            navigateToNextScreen()
+        }
+    }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val pref = getSharedPreferences("onboarding" , MODE_PRIVATE)
-            val onboarding = pref.getBoolean("flag", false)
+    private fun navigateToNextScreen() {
+        val onboarding = getSharedPreferences("onboarding", MODE_PRIVATE)
+            .getBoolean("flag", false)
 
-            val pref1 = getSharedPreferences("login" , MODE_PRIVATE)
-            val login = pref1.getBoolean("flag1", false)
+        val isLoggedIn = getSharedPreferences("userData", MODE_PRIVATE)
+            .getBoolean("isLoggedIn", false)
 
-            if (onboarding && !login) {
-                val mainIntent = Intent(this, SigningWithGoogleActivity::class.java)
-                startActivity(mainIntent)
-                finish()
-            }else if(login && onboarding){
-                val mainIntent = Intent(this, MainActivity::class.java)
-                startActivity(mainIntent)
-                finish()
-            }else{
-                val mainIntent = Intent(this, OnboardingActivity::class.java)
-                startActivity(mainIntent)
-                finish()
-            }
+        val nextActivity = when {
+            isLoggedIn -> MainActivity::class.java
+            onboarding -> SigningWithGoogleActivity::class.java
+            else -> OnboardingActivity::class.java
+        }
 
-        }, 1500)
-
+        startActivity(Intent(this, nextActivity))
+        finish()
     }
 }
